@@ -9,6 +9,7 @@
 	"dependencies": {
 		"cheerio": "^1.0.0-rc.2",
 		"google-translate-api": "^2.3.0",
+		"mkdirp": "^0.5.1",
 		"yargs": "^10.0.3"
 	}
 }

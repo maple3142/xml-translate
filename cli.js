@@ -24,7 +24,14 @@ const { _: [file], from, to, selector, output } = require('yargs')
 	.argv
 const fs = require('fs')
 const path = require('path')
+const mkdirp = require('mkdirp')
 const translateXML = require('./index')
+
+function mkdirp_p(path) {
+	return new Promise((res, rej) => {
+		mkdirp(path,err=>err?rej(err):res())
+	})
+}
 fs.readFile(path.join(process.cwd(), file), (err, xml) => {
 	translateXML({
 		xml, from, to, selector
@@ -33,7 +40,15 @@ fs.readFile(path.join(process.cwd(), file), (err, xml) => {
 			console.log(r)
 		}
 		else {
-			fs.writeFile(path.join(process.cwd(), output), r, err => err ? console.log(err) : console.log(`successful wrote to ${output}`))
+			const fileToWrite = path.isAbsolute(output) ? output : path.join(process.cwd(), output)
+			
+			const p=Promise.resolve()
+			if (output.indexOf('/') != -1) { //has directory path
+				p.then(mkdirp_p(output.split('/').slice(0,-1).join('/')))
+			}
+			p.then(_ => {
+				fs.writeFile(fileToWrite, r, err => err ? console.log(err) : console.log(`successful wrote to ${output}`))
+			})
 		}
 	}).catch(e => console.error(e))
 })
