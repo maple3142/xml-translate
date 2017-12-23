@@ -1,0 +1,14 @@
+{
+	"name": "xml-translate",
+	"version": "0.0.1",
+	"main": "index.js",
+	"license": "MIT",
+	"bin": {
+		"xml-translate": "./cli.js"
+	},
+	"dependencies": {
+		"cheerio": "^1.0.0-rc.2",
+		"google-translate-api": "^2.3.0",
+		"yargs": "^10.0.3"
+	}
+}
