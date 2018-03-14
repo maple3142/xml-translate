@@ -1,4 +1,6 @@
 # xml-translate
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/maple3142/xml-translate.svg)](https://greenkeeper.io/)
 a simple tool to translate xml/html with google translate
 
 ## install
